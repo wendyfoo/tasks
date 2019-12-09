@@ -15,4 +15,13 @@
 #
 
 class Task < ApplicationRecord
+  validates :priority, :presence => true
+  validates :description, :presence => true
+  validates :category, :presence => true
+  belongs_to :user
+  
+  def user
+    return User.where({ :id => self.user_id }).at(0)
+  end
+
 end

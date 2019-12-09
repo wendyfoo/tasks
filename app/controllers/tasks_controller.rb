@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     @task.priority = params.fetch("priority_from_query")
     @task.deadline = params.fetch("deadline_from_query")
     @task.completed = params.fetch("completed_from_query", false)
-    @task.user_id = params.fetch("user_id_from_query")
+    @task.user_id = session.fetch(:user_id)
     @task.duration = params.fetch("duration_from_query")
 
     if @task.valid?

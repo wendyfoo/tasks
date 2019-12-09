@@ -13,5 +13,12 @@
 class User < ApplicationRecord
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
+  validates :username, :presence => true
+  validates :username, :uniqueness => true
   has_secure_password
+
+  def task
+    return Task.where({ :user_id => self.id})
+  end 
+    
 end
