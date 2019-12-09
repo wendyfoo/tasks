@@ -1,0 +1,160 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Task #<%= @task.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/tasks" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_task/<%= @task.id %>" class="btn btn-block btn-outline-secondary">
+          Delete task
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @task.description %>
+      </dd>
+
+      <dt>
+        Category
+      </dt>
+      <dd>
+        <%= @task.category %>
+      </dd>
+
+      <dt>
+        Priority
+      </dt>
+      <dd>
+        <%= @task.priority %>
+      </dd>
+
+      <dt>
+        Deadline
+      </dt>
+      <dd>
+        <%= @task.deadline %>
+      </dd>
+
+      <dt>
+        Completed
+      </dt>
+      <dd>
+        <%= @task.completed %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @task.user_id %>
+      </dd>
+
+      <dt>
+        Duration
+      </dt>
+      <dd>
+        <%= @task.duration %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@task.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@task.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit task
+    </h2>
+
+    <form action="/modify_task/<%= @task.id %>"  method="post" >
+      <div class="form-group">
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="description_from_query" class="form-control" value="<%= @task.description %>">
+      </div>
+
+      <div class="form-group">
+        <label for="category_box">
+          Category
+        </label>
+
+        <input type="text" id="category_box" name="category_from_query" class="form-control" value="<%= @task.category %>">
+      </div>
+
+      <div class="form-group">
+        <label for="priority_box">
+          Priority
+        </label>
+
+        <input type="text" id="priority_box" name="priority_from_query" class="form-control" value="<%= @task.priority %>">
+      </div>
+
+      <div class="form-group">
+        <label for="deadline_box">
+          Deadline
+        </label>
+
+        <input type="text" id="deadline_box" name="deadline_from_query" class="form-control" value="<%= @task.deadline %>">
+      </div>
+
+      <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" class="custom-control-input" id="completed_box" name="completed_from_query" value="1" <%= "checked" if @task.completed %>>
+
+        <label class="custom-control-label"
+          for="completed_box">Completed</label>
+      </div>
+
+      <div class="form-group">
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="user_id_from_query" class="form-control" value="<%= @task.user_id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="duration_box">
+          Duration
+        </label>
+
+        <input type="text" id="duration_box" name="duration_from_query" class="form-control" value="<%= @task.duration %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
