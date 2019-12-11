@@ -8,7 +8,7 @@
   <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
   <meta charset="utf-8">
 
-  <!-- Make it responsive to small screens. Include only if you're using responsive CSS. -->
+  <!-- Make it responsive to small screens. Include only if you are using responsive CSS. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <%= csrf_meta_tags %>
@@ -37,19 +37,20 @@
   </div>
 
     <nav>
-      <a href="/user">
-        All Users
-      </a>
-      <a href="/task">
-        All Tasks
-      </a>
-      <a href="/task">
-        All Tasks
-      </a>
-     <% if @current_user != nil %> 
+      <div>
+        <a href="/user">
+          All Users
+        </a>
+      </div>
+      <% if @current_user != nil %> 
+      <div>
+        <a href="/tasks">
+          <%= @current_user.username %> - All Tasks
+        </a>
+      </div>
       <div>
         <a href="/user/<%= @current_user.username %>">
-        <%= @current_user.username %>
+        <%= @current_user.username %> - Task Generator 
         </a>
       </div>
       <%end%>

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
   
   def calculate
-    input_minutes = params.fetch(:minutes)
+    input_minutes = params.fetch(:minutes).to_i
     # task_minutes = Task.pluck(:duration) 
     task_list = []
     counter = 0 
@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     while input_minutes > 0
       a = Task.at(counter)
       task_minutes = a.duration
-      input_minutes = input_minutes - task.minutes
+      input_minutes = input_minutes - task_minutes
+      @task_list << a
       counter = counter + 1
-      task_minutes << a
     end
 
     respond_to do |format|

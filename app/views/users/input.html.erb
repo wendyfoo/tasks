@@ -1,8 +1,8 @@
-<h1>Hi <%= @user.username %>!</h1>
+<h1>Hi <%= @current_user.username %>!</h1>
 <br>
 <h2>How much time do you have?</h2>
 <dd>
-  <form action="/user/<%= @user.id %>/calculate" method="post">
+  <form action="/user/<%= @user.username %>/calculate" method="post">
     <label for="minutes"></label>
     <input id="minutes" type="number" name="minutes" placeholder="Enter minutes...">
     <!--NEED TO ROUND INTEGER UP -->

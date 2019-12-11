@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      List of all tasks
+      <%= @current_user.username %> - All Tasks
     </h1>
   </div>
 </div>
@@ -107,14 +107,6 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -150,13 +142,6 @@
 
         <td>
           <%= task.duration %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(task.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(task.updated_at) %> ago
         </td>
 
         <td>
