@@ -1,0 +1,33 @@
+<h1>List of users</h1>
+
+<table border="1">
+  <tr>
+    <th>
+      Username
+    </th>
+
+    <th>
+      Email
+    </th>
+
+    <th>
+      Additional Details
+    </th>
+  </tr>
+
+  <% @users.each do |user| %>
+  
+  <tr>
+    <td>
+      <%= user.username %>
+    </td>
+    <td>
+      <%= user.email %>
+    </td>
+    <td>
+      <a href="/user/<%= user.username %>">Show details</a>
+    </td>
+  </tr>
+
+  <% end %>
+</table>

@@ -1,6 +1,62 @@
 class UsersController < ApplicationController
   skip_before_action(:force_user_sign_in, { :only => [:new_registration_form, :create] })
   
+  def output
+    render({ :template => "users/output.html.erb" })
+  end
+  
+  def calculate
+    avaliable_minutes = params.fetch(:minutes) # number
+    dataset_minutes = Task.pluck(:duration) # number
+
+    task_minutes = 0 # counter
+
+    for counter in dataset_minutes do
+      while task_minutes.to_i < avaliable_minutes.to_i 
+        task_minutes = task_minutes + counter.to_i
+      end  
+    end    
+
+    respond_to do |format|
+      format.json do
+        render({ :json => user.as_json })
+      end
+
+      format.html do
+        redirect_to("/user/:the_username/output")
+      end
+    end    
+  end
+  
+  def input
+    the_username = params.fetch(:the_username)
+    @user = User.where({ :username => the_username }).at(0)
+
+    respond_to do |format|
+      format.json do
+        render({ :json => @user.as_json })
+      end
+
+      format.html do
+        render({ :template => "users/input.html.erb" })
+      end
+    end
+  end
+  
+  def index
+    @users = User.all.order({ :username => :asc })
+
+    respond_to do |format|
+      format.json do
+        render({ :json => @users.as_json })
+      end
+
+      format.html do
+        render({ :template => "users/index.html.erb" })
+      end
+    end
+  end 
+
   def new_registration_form
     render({ :template => "user_sessions/sign_up.html.erb" })
   end

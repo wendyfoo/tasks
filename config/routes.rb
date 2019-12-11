@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
-  # Routes for the User Profile:
+  # Routes for User Profile:
 
   # DISPLAY
-  match("/user/:username_from_query", { :controller => "user_sessions", :action => "display", :via => "post"})
+  match("/user", { :controller => "users", :action => "index", :via => "get"})
+
+  # INPUT
+  match("/user/:the_username", { :controller => "users", :action => "input", :via => "get"})
+
+  # OUTPUT
+  match("/user/:the_username/calculate", { :controller => "users", :action => "calculate", :via => "post"})
+  match("/user/:the_username/output", { :controller => "users", :action => "output", :via => "get"})
 
   #------------------------------
 
