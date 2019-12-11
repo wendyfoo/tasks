@@ -6,16 +6,18 @@ class UsersController < ApplicationController
   end
   
   def calculate
-    avaliable_minutes = params.fetch(:minutes) # number
-    dataset_minutes = Task.pluck(:duration) # number
-
-    task_minutes = 0 # counter
-
-    for counter in dataset_minutes do
-      while task_minutes.to_i < avaliable_minutes.to_i 
-        task_minutes = task_minutes + counter.to_i
-      end  
-    end    
+    input_minutes = params.fetch(:minutes)
+    # task_minutes = Task.pluck(:duration) 
+    task_list = []
+    counter = 0 
+    
+    while input_minutes > 0
+      a = Task.at(counter)
+      task_minutes = a.duration
+      input_minutes = input_minutes - task.minutes
+      counter = counter + 1
+      task_minutes << a
+    end
 
     respond_to do |format|
       format.json do

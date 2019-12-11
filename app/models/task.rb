@@ -18,7 +18,7 @@ class Task < ApplicationRecord
   validates :priority, :presence => true
   validates :description, :presence => true
   validates :category, :presence => true
-  default_scope { order('priority ASC', 'deadline ASC') }
+  default_scope { order('priority ASC', 'duration ASC', 'deadline ASC') }
 
   belongs_to :user
   

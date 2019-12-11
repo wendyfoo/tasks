@@ -5,12 +5,6 @@
     FinalProject
   </title>
 
-  <nav>
-  <a href="/users">
-    All Users
-  </a>
-  </nav>
-
   <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
   <meta charset="utf-8">
 
@@ -40,8 +34,44 @@
   <div class="container">
     <%= render "shared/flashes" %>
     <%= yield %>
-
   </div>
+
+    <nav>
+      <a href="/user">
+        All Users
+      </a>
+      <a href="/task">
+        All Tasks
+      </a>
+      <a href="/task">
+        All Tasks
+      </a>
+     <% if @current_user != nil %> 
+      <div>
+        <a href="/user/<%= @current_user.username %>">
+        <%= @current_user.username %>
+        </a>
+      </div>
+      <%end%>
+    <% if @current_user == nil %>
+      <div>
+        <a href="/user_sign_up">
+          Sign Up
+        </a>
+      </div>
+      <div>
+        <a href="/user_sign_in">
+          Sign In
+        </a>
+      </div>
+      <%else%>
+      <div>
+        <a href="/user_sign_out">
+          Sign Out
+        </a>
+      </div>
+      <%end%>
+    </nav>
 
 </body>
 </html>
