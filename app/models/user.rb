@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :username, :uniqueness => true
   has_secure_password
 
-  def task
+  def tasks
     return Task.where({ :user_id => self.id})
   end 
     

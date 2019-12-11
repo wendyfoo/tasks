@@ -33,9 +33,6 @@
 
   <div class="container">
     <%= render "shared/flashes" %>
-    <%= yield %>
-  </div>
-
     <nav>
       <div>
         <a href="/user">
@@ -73,6 +70,8 @@
       </div>
       <%end%>
     </nav>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

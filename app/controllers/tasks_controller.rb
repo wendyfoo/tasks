@@ -1,14 +1,13 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order({ :created_at => :desc })
-    @task.completed = Task.all.completion_verification
+    # @tasks = Task.where({:user_id => session[:user_id]}).order({ :created_at => :desc })
+    @tasks = @current_user.tasks
     render({ :template => "tasks/index.html.erb" })
   end
 
   def show
     the_id = params.fetch("id_from_path")
     @task = Task.where({:id => the_id }).at(0)
-
     render({ :template => "tasks/show.html.erb" })
   end
 

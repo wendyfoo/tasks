@@ -8,11 +8,11 @@ class UsersController < ApplicationController
   def calculate
     input_minutes = params.fetch(:minutes).to_i
     # task_minutes = Task.pluck(:duration) 
-    task_list = []
+    @task_list = []
     counter = 0 
     
     while input_minutes > 0
-      a = Task.at(counter)
+      a = @current_user.tasks.at(counter)
       task_minutes = a.duration
       input_minutes = input_minutes - task_minutes
       @task_list << a
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       end
 
       format.html do
-        redirect_to("/user/:the_username/output")
+        render({ :template => "users/output.html.erb" })
       end
     end    
   end
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new
-    @user.email = params.fetch("email_from_query")
+    @user.email = true
     @user.password = params.fetch("password_from_query")
     @user.password_confirmation = params.fetch("password_confirmation_from_query")
     @user.username = params.fetch("username_from_query")
@@ -74,7 +74,6 @@ class UsersController < ApplicationController
 
     if save_status == true
       session.store(:user_id,  @user.id)
-   
       redirect_to("/", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => "User account failed to create successfully."})
@@ -87,7 +86,7 @@ class UsersController < ApplicationController
 
   def update
     @user = @current_user
-    @user.email = params.fetch("email_from_query")
+    @user.email = true
     @user.password = params.fetch("password_from_query")
     @user.password_confirmation = params.fetch("password_confirmation_from_query")
     @user.username = params.fetch("username_from_query")

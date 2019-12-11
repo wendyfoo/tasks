@@ -31,7 +31,7 @@ class Task < ApplicationRecord
   end
 
   def completion_verification
-    if self.completed = true
+    if self.completed == true
       return "Closed"
     else 
       return "Open"
