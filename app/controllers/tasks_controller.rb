@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all.order({ :created_at => :desc })
-
+    @task.completed = Task.all.completion_verification
     render({ :template => "tasks/index.html.erb" })
   end
 

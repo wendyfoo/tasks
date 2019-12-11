@@ -30,4 +30,12 @@ class Task < ApplicationRecord
     return self.all.order({ :priority => :asc })
   end
 
+  def completion_verification
+    if self.completed = true
+      return "Closed"
+    else 
+      return "Open"
+    end 
+  end
+
 end

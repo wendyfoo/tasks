@@ -6,23 +6,21 @@ class UserSessionsController < ApplicationController
   end
 
   def add_cookie
-    user = User.where({ :email => params.fetch("email_from_query") }).at(0)
-    the_username = params.fetch(:username_from_query)   
-     
+    the_username = User.where({ :username => params.fetch("username_from_query")}).at(0)
     the_supplied_password = params.fetch("password_from_query")
     
-    if user != nil
-      are_they_legit = user.authenticate(the_supplied_password)
+    if the_username != nil
+      are_they_legit = the_username.authenticate(the_supplied_password)
     
       if are_they_legit == false
-        redirect_to("/user_sign_in", { :alert => "Password incorrect." })
+        redirect_to("/user_sign_in", { :alert => "This is awkward. Your password is incorrect." })
       else
-        session.store(:user_id, user.id)
-        redirect_to("/", { :notice => "Signed in successfully." })
+        session[:user_id] = the_username.id
+        redirect_to("/tasks", { :notice => "Signed in successfully." })
       end
 
     else
-      redirect_to("/user_sign_in", { :alert => "There's no user account with that email address." })
+      redirect_to("/user_sign_in", { :alert => "This is awkward. There's no user account with that username." })
     end
   end
 
