@@ -25,21 +25,21 @@ class UsersController < ApplicationController
     if input_minutes < total_duration
       @list = @task_list.pop(counter - 1)
       list_minutes = @list.pluck(:duration).sum
-      @leftover_minutes = list_minutes - original_input_minutes
+      @leftover_minutes = original_input_minutes - list_minutes
     else
-      @leftover_minutes = "1000"
+      @leftover_minutes = "0"
       @list = @task_list
     end
 
-    # respond_to do |format|
-    #   format.json do
-    #     render({ :json => user.as_json })
-    #   end
+    respond_to do |format|
+      format.json do
+        render({ :json => user.as_json })
+      end
 
-    #   format.html do
+      format.html do
          render({ :template => "users/output.html.erb" })
-    #   end
-    # end    
+      end
+    end    
   end
   
   def input

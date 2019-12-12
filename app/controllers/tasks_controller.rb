@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
-  def completed
-    
+
+  def generated
+    the_id = params.fetch("id_from_path")
+    @task = Task.where({:id => the_id }).at(0)
+    render({ :template => "tasks/generated.html.erb" })
   end
 
   def add

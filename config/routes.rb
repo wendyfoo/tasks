@@ -24,11 +24,12 @@ Rails.application.routes.draw do
   match("/tasks", { :controller => "tasks", :action => "index", :via => "get"})
   match("/", { :controller => "tasks", :action => "index", :via => "get"})
   match("/tasks/:id_from_path", { :controller => "tasks", :action => "show", :via => "get"})
-  
+
   # UPDATE
   match("/modify_task/:id_from_path", { :controller => "tasks", :action => "update", :via => "post"})
   match("/completed_task/:id_from_path", { :controller => "tasks", :action => "completed", :via => "post"})
-  
+  match("/generated_task/:id_from_path", { :controller => "tasks", :action => "generated", :via => "get"})
+
   # DELETE
   match("/delete_task/:id_from_path", { :controller => "tasks", :action => "destroy", :via => "get"})
 
