@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   
   def calculate
     input_minutes = params.fetch(:minutes).to_i
-    # task_minutes = Task.pluck(:duration) 
     @task_list = []
-    counter = 0 
+    counter = 0
+    incomplete_tasks = @current_user.tasks.where({:completed => false}) 
     
     while input_minutes > 0
-      a = @current_user.tasks.at(counter)
+      a = incomplete_tasks.at(counter)
       task_minutes = a.duration
       input_minutes = input_minutes - task_minutes
       @task_list << a

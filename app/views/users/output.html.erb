@@ -28,11 +28,7 @@
         </th>
 
         <th>
-          Completed
-        </th>
-
-        <th>
-          User
+          Status
         </th>
 
         <th>
@@ -40,14 +36,7 @@
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
+          Update Task
         </th>
       </tr>
 
@@ -74,27 +63,16 @@
         </td>
 
         <td>
-          <%= task.completed %>
+          <%= task.completion_verification %>
         </td>
 
         <td>
-          <%= task.user_id %>
-        </td>
-
-        <td>
-          <%= task.duration %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(task.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(task.updated_at) %> ago
+          <%= task.duration %> mins
         </td>
 
         <td>
           <a href="/tasks/<%= task.id %>">
-            Show details
+            Update Task
           </a>
         </td>
       </tr>

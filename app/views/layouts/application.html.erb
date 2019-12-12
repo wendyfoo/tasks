@@ -33,43 +33,7 @@
 
   <div class="container">
     <%= render "shared/flashes" %>
-    <nav>
-      <div>
-        <a href="/user">
-          All Users
-        </a>
-      </div>
-      <% if @current_user != nil %> 
-      <div>
-        <a href="/tasks">
-          <%= @current_user.username %> - All Tasks
-        </a>
-      </div>
-      <div>
-        <a href="/user/<%= @current_user.username %>">
-        <%= @current_user.username %> - Task Generator 
-        </a>
-      </div>
-      <%end%>
-    <% if @current_user == nil %>
-      <div>
-        <a href="/user_sign_up">
-          Sign Up
-        </a>
-      </div>
-      <div>
-        <a href="/user_sign_in">
-          Sign In
-        </a>
-      </div>
-      <%else%>
-      <div>
-        <a href="/user_sign_out">
-          Sign Out
-        </a>
-      </div>
-      <%end%>
-    </nav>
+    
     <%= yield %>
   </div>
 
