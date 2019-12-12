@@ -1,75 +1,6 @@
-<div class="row mb-3">
-  <div class="col-md-12">
-    <h1>
-      <%= @current_user.username %> - All Tasks
-    </h1>
-  </div>
-</div>
-
-<hr>
-
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <h2>
-      Add a new task
-    </h2>
-
-    <form action="/insert_task" method="post">
-      <div class="form-group">
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="description_from_query" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="category_box">
-          Category
-        </label>
-
-        <input type="text" id="category_box" name="category_from_query" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="priority_box">
-          Priority
-        </label>
-
-        <input type="text" id="priority_box" name="priority_from_query" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="deadline_box">
-          Deadline
-        </label>
-
-        <input type="text" id="deadline_box" name="deadline_from_query" class="form-control">
-      </div>
-
-      <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" class="custom-control-input" id="completed_box" name="completed_from_query" value="1">
-
-        <label class="custom-control-label" for="completed_box">Completed</label>
-      </div>
-
-
-      <div class="form-group">
-        <label for="duration_box">
-          Duration
-        </label>
-
-        <input type="text" id="duration_box" name="duration_from_query" class="form-control">
-      </div>
-
-      <button class="btn btn-block btn-outline-secondary">
-        Create task
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
+<h1> Hi <%= @current_user.username %>!</h1>
+<br>
+<h1> Here are all your tasks: </h1>
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
@@ -147,5 +78,8 @@
     </table>
   </div>
 </div>
+
+<a href='/add_new_task'><button>Add New Task</button></a>
+
 
 <hr>

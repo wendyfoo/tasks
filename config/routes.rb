@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Routes for User Profile:
 
   # DISPLAY
-  match("/user", { :controller => "users", :action => "index", :via => "get"})
+  # match("/user", { :controller => "users", :action => "index", :via => "get"})
 
   # INPUT
   match("/user/:the_username", { :controller => "users", :action => "input", :via => "get"})
@@ -17,10 +17,12 @@ Rails.application.routes.draw do
   # Routes for the Task:
 
   # CREATE
+  match("/add_new_task", { :controller => "tasks", :action => "add", :via => "get"})
   match("/insert_task", { :controller => "tasks", :action => "create", :via => "post"})
           
   # READ
   match("/tasks", { :controller => "tasks", :action => "index", :via => "get"})
+  match("/", { :controller => "tasks", :action => "index", :via => "get"})
   match("/tasks/:id_from_path", { :controller => "tasks", :action => "show", :via => "get"})
   
   # UPDATE

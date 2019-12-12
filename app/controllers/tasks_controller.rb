@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+  def add
+    render({ :template => "tasks/add_new_task.html.erb" })
+  end
+  
   def index
     # @tasks = Task.where({:user_id => session[:user_id]}).order({ :created_at => :desc })
     @tasks = @current_user.tasks
