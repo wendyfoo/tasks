@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
     if @task.valid?
       @task.save
-      redirect_to("/tasks/#{@task.id}", { :notice => "Task updated successfully."} )
+      redirect_to("/tasks", { :notice => "Task updated successfully."} )
     else
       redirect_to("/tasks/#{@task.id}", { :alert => "Task failed to update successfully." })
     end

@@ -19,6 +19,15 @@ class UsersController < ApplicationController
       counter = counter + 1
     end
 
+    # total_duration = @task_list.duration.sum
+
+    # if input_minutes < total_duration
+    #   return @task_list.drop(counter)
+    #   return @leftover_minutes == total_duration - input_minutes
+    # else
+    #   return @task_list
+    # end
+
     respond_to do |format|
       format.json do
         render({ :json => user.as_json })
