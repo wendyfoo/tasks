@@ -40,7 +40,7 @@
         </th>
       </tr>
 
-      <% @task_list.each do |task| %>
+      <% @list.each do |task| %>
       <tr>
         <td>
           <%= task.id %>
@@ -72,8 +72,15 @@
 
         <td>
           <a href="/tasks/<%= task.id %>">
-            Yes!
+            Yes
           </a>
+
+            <form action="/completed_task/:id_from_path" method="post">
+            <label for="completed_task"></label>
+            <input id="completed_task" type="hidden">
+            <button>Yes </button>
+            </form>
+
         </td>
       </tr>
       <% end %>
@@ -81,6 +88,6 @@
   </div>
 </div>
 
-<h2> You have an extra <%= @leftover_minutes %> mins, but don't goof off! </h2>
+<h2> You have an extra <%= @leftover_minutes %> mins, but do not goof off </h2>
 
 </hr>

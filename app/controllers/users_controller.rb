@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   
   def calculate
     input_minutes = params.fetch(:minutes).to_i
+    original_input_minutes = params.fetch(:minutes).to_i
     @task_list = []
     counter = 0
     incomplete_tasks = @current_user.tasks.where({:completed => false}) 
@@ -19,24 +20,26 @@ class UsersController < ApplicationController
       counter = counter + 1
     end
 
-    # total_duration = @task_list.duration.sum
+    total_duration = @task_list.pluck(:duration).sum
+    
+    if input_minutes < total_duration
+      @list = @task_list.pop(counter - 1)
+      list_minutes = @list.pluck(:duration).sum
+      @leftover_minutes = list_minutes - original_input_minutes
+    else
+      @leftover_minutes = "1000"
+      @list = @task_list
+    end
 
-    # if input_minutes < total_duration
-    #   return @task_list.drop(counter)
-    #   return @leftover_minutes == total_duration - input_minutes
-    # else
-    #   return @task_list
-    # end
+    # respond_to do |format|
+    #   format.json do
+    #     render({ :json => user.as_json })
+    #   end
 
-    respond_to do |format|
-      format.json do
-        render({ :json => user.as_json })
-      end
-
-      format.html do
-        render({ :template => "users/output.html.erb" })
-      end
-    end    
+    #   format.html do
+         render({ :template => "users/output.html.erb" })
+    #   end
+    # end    
   end
   
   def input
@@ -85,7 +88,7 @@ class UsersController < ApplicationController
       session.store(:user_id,  @user.id)
       redirect_to("/", { :notice => "User account created successfully."})
     else
-      redirect_to("/user_sign_up", { :alert => "User account failed to create successfully."})
+      redirect_to("/user_sign_up", { :alert => "This is awkward. User account failed to create successfully."})
     end
   end
     

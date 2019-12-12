@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+  def completed
+    
+  end
+
   def add
     render({ :template => "tasks/add_new_task.html.erb" })
   end

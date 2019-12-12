@@ -2,7 +2,7 @@
 <br>
 <h2>How much time do you have?</h2>
 <dd>
-  <form action="/user/<%= @user.username %>/calculate" method="post">
+  <form action="/user/<%= @user.username %>/calculate" method="get">
     <label for="minutes"></label>
     <input id="minutes" type="text" name="minutes" placeholder="Enter minutes...">
     <!--NEED TO ROUND INTEGER UP -->
