@@ -10,19 +10,17 @@ class UsersController < ApplicationController
     original_input_minutes = params.fetch(:minutes).to_i
     @task_list = []
     counter = 0
-    incomplete_tasks = @current_user.tasks.where({:completed => false}) 
+    incomplete_tasks = @current_user.tasks.where({:completed => false}).where("duration <= ?", input_minutes) 
     
     if input_minutes > incomplete_tasks.pluck(:duration).sum
-      total_duration = incomplete_tasks.pluck(:duration).sum 
       @leftover_minutes = input_minutes - incomplete_tasks.pluck(:duration).sum
       @list = incomplete_tasks
     
-    elsif input_minutes = incomplete_tasks.pluck(:duration).sum
-      total_duration = incomplete_tasks.pluck(:duration).sum 
-      @leftover_minutes = input_minutes - incomplete_tasks.pluck(:duration).sum
+    elsif input_minutes == incomplete_tasks.pluck(:duration).sum
+      @leftover_minutes = "0"
       @list = incomplete_tasks
-      
-    else     
+
+    else input_minutes < incomplete_tasks.pluck(:duration).sum
       while input_minutes > 0
         a = incomplete_tasks.at(counter)
         task_minutes = a.duration
@@ -70,7 +68,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.all.order({ :username => :asc })
+    @user = @current_user.user.all.order({ :username => :asc })
 
     respond_to do |format|
       format.json do

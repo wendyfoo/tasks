@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   def generated
     the_id = params.fetch("id_from_path")
-    @task = Task.where({:id => the_id }).at(0)
+    @task = @current_user.tasks.where({:id => the_id }).at(0)
     render({ :template => "tasks/generated.html.erb" })
   end
 
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
   def show
     the_id = params.fetch("id_from_path")
-    @task = Task.where({:id => the_id }).at(0)
+    @task = @current_user.tasks.where({:id => the_id }).at(0)
     render({ :template => "tasks/show.html.erb" })
   end
 
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   def update
     the_id = params.fetch("id_from_path")
-    @task = Task.where({ :id => the_id }).at(0)
+    @task = @current_user.tasks.where({ :id => the_id }).at(0)
 
     @task.description = params.fetch("description_from_query")
     @task.category = params.fetch("category_from_query")
@@ -62,7 +62,7 @@ class TasksController < ApplicationController
 
   def destroy
     the_id = params.fetch("id_from_path")
-    @task = Task.where({ :id => the_id }).at(0)
+    @task = @current_user.tasks.where({ :id => the_id }).at(0)
 
     @task.destroy
 
