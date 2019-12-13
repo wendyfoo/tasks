@@ -13,16 +13,24 @@ class UsersController < ApplicationController
     incomplete_tasks = @current_user.tasks.where({:completed => false}) 
     
     if input_minutes > incomplete_tasks.pluck(:duration).sum
-      @leftover_minutes = input_minutes
-      @list = @task_list
-    else 
-      while input_minutes >= 0
+      total_duration = incomplete_tasks.pluck(:duration).sum 
+      @leftover_minutes = input_minutes - incomplete_tasks.pluck(:duration).sum
+      @list = incomplete_tasks
+    
+    elsif input_minutes = incomplete_tasks.pluck(:duration).sum
+      total_duration = incomplete_tasks.pluck(:duration).sum 
+      @leftover_minutes = input_minutes - incomplete_tasks.pluck(:duration).sum
+      @list = incomplete_tasks
+      
+    else     
+      while input_minutes > 0
         a = incomplete_tasks.at(counter)
         task_minutes = a.duration
         input_minutes = input_minutes - task_minutes
         @task_list << a
         counter = counter + 1
       end
+      
       total_duration = @task_list.pluck(:duration).sum
       
       if input_minutes < total_duration
