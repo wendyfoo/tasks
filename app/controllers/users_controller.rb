@@ -12,23 +12,27 @@ class UsersController < ApplicationController
     counter = 0
     incomplete_tasks = @current_user.tasks.where({:completed => false}) 
     
-    while input_minutes > 0
-      a = incomplete_tasks.at(counter)
-      task_minutes = a.duration
-      input_minutes = input_minutes - task_minutes
-      @task_list << a
-      counter = counter + 1
-    end
-
-    total_duration = @task_list.pluck(:duration).sum
-    
-    if input_minutes < total_duration
-      @list = @task_list.pop(counter - 1)
-      list_minutes = @list.pluck(:duration).sum
-      @leftover_minutes = original_input_minutes - list_minutes
-    else
-      @leftover_minutes = "0"
+    if input_minutes > incomplete_tasks.pluck(:duration).sum
+      @leftover_minutes = input_minutes
       @list = @task_list
+    else 
+      while input_minutes >= 0
+        a = incomplete_tasks.at(counter)
+        task_minutes = a.duration
+        input_minutes = input_minutes - task_minutes
+        @task_list << a
+        counter = counter + 1
+      end
+      total_duration = @task_list.pluck(:duration).sum
+      
+      if input_minutes < total_duration
+        @list = @task_list.pop(counter - 1)
+        list_minutes = @list.pluck(:duration).sum
+        @leftover_minutes = original_input_minutes - list_minutes
+      else
+        @leftover_minutes = "0"
+        @list = @task_list
+      end
     end
 
     respond_to do |format|
@@ -77,7 +81,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new
-    @user.email = true
+    @user.email = "email"
     @user.password = params.fetch("password_from_query")
     @user.password_confirmation = params.fetch("password_confirmation_from_query")
     @user.username = params.fetch("username_from_query")
