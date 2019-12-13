@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Routes for User Profile:
 
   # DISPLAY
-  # match("/user", { :controller => "users", :action => "index", :via => "get"})
+  match("/user", { :controller => "users", :action => "index", :via => "get"})
 
   # INPUT
   match("/user/:the_username", { :controller => "users", :action => "input", :via => "get"})

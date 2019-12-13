@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @user = @current_user.user.all.order({ :username => :asc })
+    @user = User.all.order({ :username => :asc })
 
     respond_to do |format|
       format.json do
@@ -87,16 +87,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new
-    @user.email = "email"
+    @user.email = params.fetch("email_from_query")
     @user.password = params.fetch("password_from_query")
     @user.password_confirmation = params.fetch("password_confirmation_from_query")
     @user.username = params.fetch("username_from_query")
-
-    save_status = @user.save
+   
+    save_status = @user.save!
 
     if save_status == true
       session.store(:user_id,  @user.id)
-      redirect_to("/", { :notice => "User account created successfully."})
+      redirect_to("/tasks", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => "This is awkward. User account failed to create successfully."})
     end
